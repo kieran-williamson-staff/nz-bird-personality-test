@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NZ Bird Personality Test</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    
+    .intro {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #666;
+      font-size: 16px;
+    }
+    
+    .questions {
+      list-style: none;
+    }
+    
+    .question-item {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    
+    .question-item:hover {
+      background: #f0f0f0;
+    }
+    
+    .question-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      margin-right: 15px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .submit-btn {
+      display: block;
+      width: 200px;
+      margin: 30px auto;
+      padding: 12px 24px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: #2980b9;
+    }
+    
+    .result {
+      display: none;
+      text-align: center;
+      padding: 30px;
+      animation: fadeIn 0.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .result h2 {
+      color: #27ae60;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+    
+    .result img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .result h3 {
+      color: #2c3e50;
+      margin: 20px 0;
+      font-size: 22px;
+    }
+    
+    .result p {
+      text-align: left;
+      line-height: 1.8;
+      color: #555;
+      margin: 20px 0;
+    }
+    
+    .reset-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #95a5a6;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    
+    .reset-btn:hover {
+      background: #7f8c8d;
+    }
+    
+    /* Mobile responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .question-label {
+        font-size: 14px;
+      }
+      
+      .submit-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="quiz-section">
+      <h1>The NZ Bird Personality Test</h1>
+      <p class="intro">Read each statement and tick the box beside it if that statement is very true for you.<br>
+         Leave the box empty if the statement doesn't wholeheartedly apply to you.</p>
+      
+      <ul class="questions">
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="1">
+            <span>1. People think I'm a good listener</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="2">
+            <span>2. I'm unlikely to make small talk</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="3">
+            <span>3. People think I am precise and accurate</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="4">
+            <span>4. I enjoy working with others</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="5">
+            <span>5. I think positively about the future</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="6">
+            <span>6. I like a challenge, and work well under pressure</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="7">
+            <span>7. I feel content with my life</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="8">
+            <span>8. I like people who are loyal</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="9">
+            <span>9. People think I'm a perfectionist</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="10">
+            <span>10. Others think I am easy to talk to</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="11">
+            <span>11. I get frustrated whenever I must wait</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="12">
+            <span>12. I'm curious and like to try new things</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="13">
+            <span>13. I make decisions easily and stick with them</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="14">
+            <span>14. I think systematically</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="15">
+            <span>15. I'm good at remembering facts and figures</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="16">
+            <span>16. People think that I am energetic and like to join in on activities</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="17">
+            <span>17. I remain calm under pressure</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="18">
+            <span>18. I work best when following rules or step-by-step instructions</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="19">
+            <span>19. People think I succeed at whatever I put my mind to</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="20">
+            <span>20. I am a good speaker</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="21">
+            <span>21. I don't like taking risks</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="22">
+            <span>22. I like things to be well organised</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="23">
+            <span>23. My friends think I'm charming, and good at influencing others</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="24">
+            <span>24. I find it hard to listen to others</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="25">
+            <span>25. My friends think I am kind</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="26">
+            <span>26. I feel best when I look good and poised</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="27">
+            <span>27. I'll listen to all sides of a story before I comment</span>
+          </label>
+        </li>
+        <li class="question-item">
+          <label class="question-label">
+            <input type="checkbox" class="checkbox" data-question="28">
+            <span>28. I'm fond of stability, and don't like change</span>
+          </label>
+        </li>
+      </ul>
+      
+      <button class="submit-btn" onclick="calculateResult()">See Your Result</button>
+    </div>
+    
+    <div id="result-section" class="result"></div>
+  </div>
+
+  <script>
+    // Question mapping
+    const mapping = {
+      1: 1,  2: 3,  3: 2,  4: 4,
+      5: 4,  6: 3,  7: 1,  8: 1,
+      9: 2, 10: 4, 11: 3, 12: 3,
+     13: 3, 14: 2, 15: 2, 16: 4,
+     17: 1, 18: 2, 19: 3, 20: 4,
+     21: 2, 22: 2, 23: 4, 24: 3,
+     25: 1, 26: 4, 27: 1, 28: 1
+    };
+
+    // Bird descriptions
+    const birds = {
+      1: {
+        img: 'https://my.uconline.ac.nz/draftfile.php/24335/user/draft/557443847/keruru.jpg',
+        title: "Kererū, Wood Pigeon: Peaceful & Friendly",
+        text: `In many cultures these gentle, friendly birds are a symbol of closeness and are accepted around our homes. Pigeons are deeply local creatures, no matter where they are released they'll find their way back to their neighbourhood.<br><br>The peaceful and friendly Kererū are diplomatic people with tact. Overall, they'd call themselves 'a people person', are understanding, supportive, and great team players. Kererū have good listening skills, are pleasant to work with and can be relied upon. They are known for their nurturing ways and tend to make good tutors or mentors. These people are more likely to avoid arguments, and particularly don't want to hurt anyone else's feelings. They will often consult with others to ensure they are correct in what they do. When working with Kererū, be warm and understanding. Remember that they are naturally relaxed and slow-paced. Earning their trust might take a while, so be patient.`
+      },
+      2: {
+        img: 'https://my.uconline.ac.nz/draftfile.php/24335/user/draft/557443847/piwakawaka.jpg',
+        title: "Pīwakawaka, Fantail: Wise & Logical",
+        text: `The wise and analytical Pīwakawaka are the well-organised methodical, determined, and systematic lot. They enjoy working with precision, details, numbers and logic.<br><br>The fantail is one of the few native bird species in New Zealand that has been able to adapt to an environment greatly altered by humans. The secret to fantails' relative success compared to other native birds is their ability to produce lots of young. Its broad diet and methodical means of foraging also make the fantail resilient to environmental change.<br><br>Pīwakawaka will keep at a given task until their work is done. Their opinions are driven by logic, not feeling or intuition. They also tend to be critical and fault-finding, especially on other people's ideas or work – this means they're excellent editors or fact-checkers. Pīwakawaka are not risk-takers. When working with Pīwakawaka, be thorough, detailed and well-prepared.`
+      },
+      3: {
+        img: 'https://my.uconline.ac.nz/draftfile.php/24335/user/draft/557443847/karearea.jpg',
+        title: "Kārearea, NZ Falcon: Bold & Decisive",
+        text: `The bold and decisive Kārearea are typically dominant leaders. They are dynamic, natural achievers who are determined to succeed. They prefer their environments to be well-organised and fully functional. Like an eagle, they work best with a view from up top, looking at things holistically, planning ahead and going for what they want aggressively, and efficiently.<br><br>NZ Falcons are more often seen in active chasing flights rather than the lazy quartering flights typical of the harrier. They are well known for attacking intruders with aggressive dive-bombing strikes to the head.<br><br>Because of these traits, they are often in roles such as CEOs or military officers. Kārearea can at times be impatient, manipulative, and insensitive to other people's needs. When dealing with Kārearea, be sure to argue with facts, not opinions; and, if possible, be supportive of their goals and objectives.`
+      },
+      4: {
+        img: 'https://my.uconline.ac.nz/draftfile.php/24335/user/draft/557443847/tui.jpg',
+        title: "Tūī: Charming & Optimistic",
+        text: `In Te Ao Māori the Tūī has powerful significance. They act as messengers to the atua in the heavens. Because of their personality, Tūī are associated with life fulfilment, confidence and spiritual harmony.<br><br>The captivating and cheerful Tūī embody happiness and optimism. They are known to be chatterboxes, are friendly, inquisitive, full of life and are excellent at bringing people together. Tūī are very confident.<br><br>Much like the bird, Tūī are important pollinators and spread ideas far and wide. Because they are captivating talkers filled with enthusiasm, they tend to influence others with their ideas. Tūī can sometimes be inattentive, impatient and manipulative. They are not keen on time management and get lost working with details. Every so often, they seek recognition in what they do. In relating with Tūī, try to avoid arguments based on a negative opinion; instead, focus on rallying behind their ideas and visions to win them over.`
+      }
+    };
+
+    function calculateResult() {
+      const scores = {1: 0, 2: 0, 3: 0, 4: 0};
+      
+      // Count checked boxes
+      const checkboxes = document.querySelectorAll('.checkbox');
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          const question = parseInt(checkbox.dataset.question);
+          scores[mapping[question]]++;
+        }
+      });
+      
+      // Find highest score
+      let maxScore = 0;
+      let birdType = 1;
+      
+      for (let type in scores) {
+        if (scores[type] > maxScore) {
+          maxScore = scores[type];
+          birdType = parseInt(type);
+        }
+      }
+      
+      // Display result
+      const bird = birds[birdType];
+      const resultSection = document.getElementById('result-section');
+      const quizSection = document.getElementById('quiz-section');
+      
+      resultSection.innerHTML = `
+        <h2>Your dominant bird personality:</h2>
+        <img src="${bird.img}" alt="${bird.title}">
+        <h3>${bird.title}</h3>
+        <p>${bird.text}</p>
+        <button class="reset-btn" onclick="resetQuiz()">Take Quiz Again</button>
+      `;
+      
+      quizSection.style.display = 'none';
+      resultSection.style.display = 'block';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+      
+      // Send message to parent (Rise) if embedded
+      if (window.parent !== window) {
+        window.parent.postMessage({
+          type: 'quiz-complete',
+          result: bird.title,
+          score: maxScore
+        }, '*');
+      }
+    }
+    
+    function resetQuiz() {
+      // Clear all checkboxes
+      const checkboxes = document.querySelectorAll('.checkbox');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+      });
+      
+      // Show quiz, hide results
+      document.getElementById('quiz-section').style.display = 'block';
+      document.getElementById('result-section').style.display = 'none';
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
